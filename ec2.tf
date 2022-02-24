@@ -1,5 +1,5 @@
-resource "null_resource" "sample" {
-  provisioner "local-exec" {
-    command = "echo ${var.SERVER_COUNT}"
-  }
+resource "aws_instance" "od-instance" {
+  count = var.OD_INSTANCE_COUNT
+  instance_type = var.OD_INSTANCE_TYPE
+
 }
