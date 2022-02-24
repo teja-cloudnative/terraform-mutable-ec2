@@ -1,7 +1,7 @@
 resource "aws_instance" "od-instance" {
-  count = var.OD_INSTANCE_COUNT
+  count         = var.OD_INSTANCE_COUNT
   instance_type = var.OD_INSTANCE_TYPE
-  ami = data.aws_ami.ami.id
+  ami           = data.aws_ami.ami.id
 }
 
 resource "aws_spot_instance_request" "spot-instance" {
