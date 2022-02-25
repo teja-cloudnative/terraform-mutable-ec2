@@ -9,10 +9,14 @@ resource "aws_spot_instance_request" "spot-instance" {
   ami                    = data.aws_ami.ami.id
   instance_type          = var.SPOT_INSTANCE_TYPE
   wait_for_fulfillment   = true
+  //  root_block_device {
+  //    volume_size = 10
+  //  }
 }
 
+
 resource "aws_ec2_tag" "ec2-name-tag" {
-  count       = length(local.ALL_TAG_IDS)
+#  count       = length(local.ALL_TAG_IDS)
   resource_id = local.ALL_TAG_IDS[count.index]
   key         = "Name"
   value       = local.TAG_NAME
