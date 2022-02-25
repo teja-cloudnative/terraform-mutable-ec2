@@ -20,7 +20,7 @@ resource "aws_spot_instance_request" "spot-instance" {
 #  resource_id = local.ALL_TAG_IDS[count.index]
 #  key         = "Name"
 #  value       = local.TAG_NAME
-}
+#}
 
 #resource "aws_ec2_tag" "ec2-monitor-tag" {
 #  resource_id = aws_spot_instance_request.od-.spot_instance_id
