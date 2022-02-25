@@ -4,6 +4,3 @@ variable "OD_INSTANCE_TYPE" {}
 variable "SPOT_INSTANCE_TYPE" {}
 variable "COMPONENT" {}
 variable "ENV" {}
-variable "SPOT_VOLUME_ID" {}
-variable "OD_VOLUME_ID" {}
-variable "ALL_VOLUME_IDS" {}
