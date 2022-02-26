@@ -6,7 +6,7 @@
 #  value       = local.TAG_NAME
 #}
 
-module "tags-ec2" {
+module "tags" {
   count       = length(local.ALL_TAGS)
   source      = "git::github.com/teja-cloudnative/terraform-tags"
   TAG_NAME    = lookup(element(local.ALL_TAGS, count.index), "name")
@@ -27,6 +27,10 @@ locals {
     {
       name   = "component"
       value  = var.COMPONENT
+    },
+    {
+      name   = "project_name"
+      value  = "roboshop"
     }
   ]
 }
