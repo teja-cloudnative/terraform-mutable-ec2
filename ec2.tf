@@ -15,9 +15,3 @@ resource "aws_spot_instance_request" "spot-instance" {
   //    volume_size = 10
   //  }
 }
-
-#resource "aws_ec2_tag" "ec2-monitor-tag" {
-#  resource_id = aws_spot_instance_request.od-.spot_instance_id
-#  key         = "Monitor"
-#  value       = var.COMPONENT["monitor"]
-#}
