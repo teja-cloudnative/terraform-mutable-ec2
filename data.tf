@@ -21,3 +21,11 @@ data "terraform_remote_state" "alb" {
     region = "us-east-1"
   }
 }
+
+data "aws_secretsmanager_secret" "secret" {
+  name = "secrets/roboshop/${var.ENV}"
+}
+
+data "aws_secretsmanager_secret_version" "latest" {
+  secret_id = data.aws_secretsmanager_secret.secret.id
+}

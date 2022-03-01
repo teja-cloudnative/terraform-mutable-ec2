@@ -17,3 +17,19 @@ resource "aws_spot_instance_request" "spot-instance" {
   //    volume_size = 10
   //  }
 }
+
+resource "null_resource" "ansible-apply" {
+  count     = length(local.ALL_INSTANCE_IPS)
+  provisioner "remote-exec" {
+    connection {
+      host      = element(local.ALL_INSTANCE_IPS, count.index)
+      user      = jsondecode(data.aws_secretsmanager_secret_version.latest.secret_string)["SSH_USER"]
+      password  = jsondecode(data.aws_secretsmanager_secret_version.latest.secret_string)["SSH_PASS"]
+    }
+    inline = [
+      "ansible-pull -U https://github.com/teja-cloudnative/ansible roboshop-pull.yml -e COMPONENT=${var.COMPONENT} -e ENV=${var.ENV}"
+    ]
+  }
+}
+
+

@@ -1,5 +1,6 @@
 locals {
-  ALL_INSTANCE_IDS   = concat(aws_instance.od-instance.*.id, aws_spot_instance_request.spot-instance.*.spot_instance_id)
+  ALL_INSTANCE_IDS      = concat(aws_instance.od-instance.*.id, aws_spot_instance_request.spot-instance.*.spot_instance_id)
+  ALL_INSTANCE_IPS      = concat(aws_instance.od-instance.*.private_ip, aws_spot_instance_request.spot-instance.*.private_ip)
   ALL_SPOT_INSTANCE_IDS = aws_spot_instance_request.spot-instance.*.id
   ALL_OD_INSTANCE_IDS   = aws_instance.od-instance.*.id
   ALL_TAG_IDS           = concat(local.ALL_INSTANCE_IDS, local.ALL_SPOT_INSTANCE_IDS, local.ALL_VOLUME_IDS)
