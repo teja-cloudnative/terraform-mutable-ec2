@@ -11,6 +11,14 @@ resource "aws_security_group" "allow" {
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
   }
 
+  ingress {
+    description      = "HTTP"
+    from_port        = var.PORT
+    to_port          = var.PORT
+    protocol         = "tcp"
+    cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
