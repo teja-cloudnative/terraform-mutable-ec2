@@ -6,3 +6,4 @@ variable "COMPONENT" {}
 variable "ENV" {}
 variable "ALB_ATTACH_TO" {}
 variable "PORT" {}
+variable "TRIGGER" {}
