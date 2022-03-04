@@ -35,19 +35,18 @@ resource "random_integer" "priority" {
   max = 500
   keepers = {
     # Generate a new integer each time we switch to a new listener ARN
-    listener_arn = data.terraform_remote_state.alb.backend-listener-arn
+    listener_arn = data.terraform_remote_state.alb.backend_listener_arn
   }
 }
 
 resource "aws_lb_listener_rule" "static" {
-  count              = var.ALB_ATTACH_TO == "backend" ? 1 : 0
-  listener_arn = data.terraform_remote_state.alb.backend-listener-arn
-  priority     = aws_lb_listener.ba
+  count        = var.ALB_ATTACH_TO == "backend" ? 1 : 0
+  listener_arn = data.terraform_remote_state.alb.backend_listener_arn
+  priority     = random_integer.priority.result
 
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg.arn
-    prio
   }
 
   condition {
@@ -58,7 +57,7 @@ resource "aws_lb_listener_rule" "static" {
 
   condition {
     host_header {
-      values = ["example.com"]
+      values = ["${var.COMPONENT}-${var.ENV}.roboshop.internal"]
     }
   }
 }
