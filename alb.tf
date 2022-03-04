@@ -35,7 +35,8 @@ resource "random_integer" "priority" {
   max = 500
   keepers = {
     # Generate a new integer each time we switch to a new listener ARN
-    listener_arn = data.terraform_remote_state.alb.outputs.backend_listener_arn
+#    listener_arn = data.terraform_remote_state.alb.outputs.backend_listener_arn
+     tg_arn = aws_lb_target_group.tg.arn
   }
 }
 
